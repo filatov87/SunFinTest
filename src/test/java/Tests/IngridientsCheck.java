@@ -2,10 +2,14 @@ package Tests;
 
 import Pages.BaseFunc;
 import Pages.HomePage;
-import org.junit.After;
+import Pages.TastyPage;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 public class IngridientsCheck {
@@ -29,15 +33,24 @@ public class IngridientsCheck {
     private String HOME_PAGE = "https://www.delfi.lv";
 
 
-
     @Test
-    public void searchForFood() {
+    public void searchForFood() throws InterruptedException {
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(CapabilityType.PAGE_LOAD_STRATEGY, "eager");
+
+        LOGGER.info("Opening home URL");
         baseFunc.goToUrl(HOME_PAGE);
+
+
         LOGGER.info("Locating category and click");
         baseFunc.driver.findElement(HomePage.TASTY_CATEGORY).click();
 
+        LOGGER.info("Locating recepies dropdown and clicking");
+        Thread.sleep(10000 );
+        baseFunc.driver.findElement(TastyPage.RECEPIES_DROPDOWN).click();
 
-        baseFunc.closeBrowser();
+//        baseFunc.closeBrowser();
     }
 
 

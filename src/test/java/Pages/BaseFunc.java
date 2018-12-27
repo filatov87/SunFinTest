@@ -12,20 +12,19 @@ public class BaseFunc {
 
     public BaseFunc() {
 
-        LOGGER.info("Starting chrome");
+        LOGGER.info("Starting chrome + maximize");
         this.driver = new ChromeDriver();
-        LOGGER.info("Maximize window + implicity wait ");
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.manage().window().maximize();
+//        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 
     }
 
     public void goToUrl(String url) {
-        LOGGER.info("Opening URL");
+
         driver.get(url);
     }
+
     public void closeBrowser() {
-        LOGGER.info("Closing browser");
         driver.quit();
     }
 
