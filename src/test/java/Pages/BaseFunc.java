@@ -15,7 +15,7 @@ public class BaseFunc {
         LOGGER.info("Starting chrome + maximize");
         this.driver = new ChromeDriver();
         driver.manage().window().maximize();
-//        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
     }
 
