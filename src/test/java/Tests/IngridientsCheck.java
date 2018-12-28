@@ -38,7 +38,7 @@ public class IngridientsCheck {
 
 
     @Test
-    public void searchForFood()  {
+    public void searchForFood() {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(CapabilityType.PAGE_LOAD_STRATEGY, "eager");
@@ -74,12 +74,30 @@ public class IngridientsCheck {
         List<WebElement> ingridientList = baseFunc.driver.findElements(By.xpath("//*[contains(@class,'ing-title')]\n"));
         for (int i = 0; i < ingridientList.size(); i++) {
             WebElement ingridient = ingridientList.get(i);
-            System.out.println("***" + ingridient.getText());
-//            ingridientList.get(i).click();
+            System.out.println("* " + ingridient.getText());
         }
 
-//        baseFunc.closeBrowser();
+        LOGGER.info("Checking that ingridient page contains RecipeName");
+
+        List<WebElement> ingridientlist2 = baseFunc.driver.findElements(By.xpath("//*[contains(@class,'ing-title')]\n"));
+        for (int y = 1; y < ingridientlist2.size(); y++) {
+            WebElement ingridient2 = ingridientlist2.get(y);
+            ingridientlist2.get(y).click();
+
+//            if (baseFunc.driver.findElement(By.xpath("//*[contains(text(),\"a\" )]")) !=null) {
+            if (baseFunc.driver.findElement((By.xpath("//*[contains(text(),"+firstRecipeName+")]"))) !=null) {
+                System.out.println(ingridient2.getText() + " PRESENT");
+                baseFunc.driver.navigate().back();
+            } else {
+                System.out.println(ingridient2.getText() + " MISSING");
+                baseFunc.driver.navigate().back();
+            }
+
+        }
     }
-
-
 }
+
+
+
+
+
