@@ -13,6 +13,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 public class IngridientsCheck {
@@ -38,7 +39,7 @@ public class IngridientsCheck {
 
 
     @Test
-    public void searchForFood() {
+    public void searchForFood() throws InterruptedException {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(CapabilityType.PAGE_LOAD_STRATEGY, "eager");
@@ -83,17 +84,16 @@ public class IngridientsCheck {
         for (int y = 1; y < ingridientlist2.size(); y++) {
             WebElement ingridient2 = ingridientlist2.get(y);
             ingridientlist2.get(y).click();
+            if (baseFunc.driver.findElement(By.xpath("//*[contains(text(),\"" + firstRecipeName + "\")]")) != null) {
+//                System.out.println(ingridient2.getText() + " PRESENT");
+                System.out.println(" INGRIDEINT PRESENT");
 
-//            if (baseFunc.driver.findElement(By.xpath("//*[contains(text(),\"a\" )]")) !=null) {
-            if (baseFunc.driver.findElement((By.xpath("//*[contains(text(),"+firstRecipeName+")]"))) !=null) {
-                System.out.println(ingridient2.getText() + " PRESENT");
                 baseFunc.driver.navigate().back();
-            } else {
-                System.out.println(ingridient2.getText() + " MISSING");
-                baseFunc.driver.navigate().back();
+
             }
 
         }
+        baseFunc.closeBrowser();
     }
 }
 
